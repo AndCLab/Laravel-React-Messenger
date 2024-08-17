@@ -52,4 +52,24 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Group::class, 'group_user');
     }
+
+    public static function getUsersExceptUser(User $exceptUser)
+    {
+        $userId = $exceptUser->id;
+        $query = User::select(['users.*', 'messages.message as last_message', 'messages.created_at as last_message_date'])
+            ->where('users.id', '!=', $userId)
+            ->when(!$exceptUser->is_admin, function ($query) {
+                $query->whereNull('users.blocked_at');
+            })
+            ->leftJoin('conversations', function ($join) use ($userId) {
+                $join->on('conversations.user_id1', '=', 'users.id')
+                    ->where('conversations.user_id2', '=', $userId)
+                    ->orWhere(function ($query) {
+                        $query->on('conversations.user_id2', '=', 'users.id')
+                            ->where('conversations.user_id1', '=', Auth::id());
+                    });
+            })
+            ->leftJoin('messages', 'messages.id', '=', 'conversations.last_message_id')
+            ;
+    }
 }
