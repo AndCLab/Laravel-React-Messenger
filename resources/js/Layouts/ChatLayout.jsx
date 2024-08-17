@@ -1,19 +1,39 @@
 import { usePage } from "@inertiajs/react";
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { useEffect } from "react";
 
 const ChatLayout = ({ children }) => {
     const page = usePage();
     const conversations = page.props.conversations;
     const selectedConversation = page.props.selectedConversation;
+    const [onlineUsers, setOnlineUsers] = page.props.onlineUsers;
 
     console.log("conversations", conversations);
     console.log("selectedConversation", selectedConversation);
 
+    useEffect(() => {
+        Echo.join('online')
+            .here((users) => {
+                console.log("here", users);
+            })
+            .joining((user) => {
+                console.log("joining", user);
+            })
+            .leaving((user) => {
+                console.log("leaving", user);
+            })
+            .error((error) => {
+                console.log("error", error);
+            })
+        return () => {
+            Echo.leave("online");
+        }
+    }, []);
+
     return (
-        <AuthenticatedLayout>
+        <>
             ChatLayout
             <div>{children}</div>
-        </AuthenticatedLayout>
+        </>
     );
 }
 
