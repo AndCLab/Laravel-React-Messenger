@@ -94,7 +94,7 @@ const ChatLayout = ({ children }) => {
         <div className="flex-1 w-full flex overflow-hidden">
 
             <div className={`transition-all w-full sm:w-[220px] md:w-[300px] bg-slate-800 flex flex-col overflow-hidden ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}>
-                <div className="flex items-center justify-between py-2 px-3 text-xl font-medium">
+                <div className="flex items-center justify-between py-2 px-3 text-xl font-medium text-gray-200">
                     My Conversations
                     <div className="tootltip tooltip-left" data-tip="Create new Group">
                         <button className="text-gray-400 hover:text-gray-200">
@@ -104,7 +104,7 @@ const ChatLayout = ({ children }) => {
                 </div>
 
                 <div className="p-3">
-                    <TextInput onKeyUp={onSearch} plasceholder="Filter users and groups" className="w-full"/>
+                    <TextInput onKeyUp={onSearch} placeholder="Filter users and groups" className="w-full"/>
                 </div>
                 <div className="flex-1 overflow-auto">
                     {sortedConversations && sortedConversations.map((conversation) => (
