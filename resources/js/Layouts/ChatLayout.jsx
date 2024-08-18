@@ -1,8 +1,8 @@
 import ConversationItem from '@/Components/App/ConversationItem';
 import TextInput from "@/Components/TextInput";
+import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import { usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
-import { PencilSquareIcon } from '@heroicons/react/24/solid';
 
 const ChatLayout = ({ children }) => {
     const page = usePage();
@@ -104,7 +104,7 @@ const ChatLayout = ({ children }) => {
                 </div>
 
                 <div className="p-3">
-                    <TextInput onKeyUp={onSearch} plasceholder="FIlter users and groups" className="w-full"/>
+                    <TextInput onKeyUp={onSearch} plasceholder="Filter users and groups" className="w-full"/>
                 </div>
                 <div className="flex-1 overflow-auto">
                     {sortedConversations && sortedConversations.map((conversation) => (
