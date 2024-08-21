@@ -30,14 +30,38 @@ class Conversation extends Model
         return $this->belongsTo(Users::class, 'user_id2');
     }
 
-    public static function getConversationsForSidebar(User $exceptUser)
+    public static function getConversationsForSidebar(User $user)
     {
-        $users = User::getUsersExceptUser($exceptUser);
-        $groups = Group::getGroupsForUser($exceptUser);
+        $users = User::getUsersExceptUser($user);
+        $groups = Group::getGroupsForUser($user);
         return $users->map(function (User $user) {
             return $user->toConversationArray();
         })->concat($groups->map(function (Group $group) {
             return $group->toConversationArray();
         }));
+    }
+
+    public static function updateConversationWithMessage($userId1, $userId2, $message) 
+    {
+        // Find conversation by userId1 and userId2, then update last message_id
+        $conversation = Conversation::where(function ($query) use ($userId1, $userId2) {
+            $query->where('user_id1', $userId1)
+                ->where('user_id2', $userId2);
+        })->orWhere(function ($query) use ($userId1, $userId2) {
+            $query->where('user_id1', $userId2)
+                ->where('user_id2', $userId1);
+        })->first();
+
+        if ($conversation) {
+            $conversation->update([
+                'last_message_id' => $message->id,
+            ]);
+        } else {
+            Conversation::create([
+                'user_id1' => $userId1,
+                'user_id2' => $userId2,
+                'last_message_id' => $message->id,
+            ]);
+        }
     }
 }
