@@ -14,9 +14,6 @@ const ChatLayout = ({ children }) => {
 
     const isUserOnline = (userId) => onlineUsers[userId];
 
-    console.log("conversations", conversations);
-    console.log("selectedConversation", selectedConversation);
-
     const onSearch = (ev) => {
         const search = ev.target.value.toLowerCase();
         setLocalConversations(
@@ -93,10 +90,10 @@ const ChatLayout = ({ children }) => {
         <>
         <div className="flex-1 w-full flex overflow-hidden">
 
-            <div className={`transition-all w-full sm:w-[220px] md:w-[450px] bg-slate-800 flex flex-col overflow-hidden ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}>
+            <div className={`transition-all w-full sm:w-[220px] md:w-[360px] bg-slate-800 flex flex-col overflow-hidden ${selectedConversation ? "-ml-[100%] sm:ml-0" : ""}`}>
                 <div className="flex items-center justify-between py-2 px-3 text-xl font-medium text-gray-200">
                     Chats
-                    <div className="tootltip tooltip-left" data-tip="Create new Group">
+                    <div className="tooltip tooltip-left" data-tip="Create new Group">
                         <button className="text-gray-400 hover:text-gray-200">
                             <PencilSquareIcon className="w-4 h-4 inline-block ml-2"/>
                         </button>
