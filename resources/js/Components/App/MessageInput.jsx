@@ -14,9 +14,9 @@ const MessageInput = ({ conversation = null }) => {
     const [messageSending, setMessageSending] = useState("");
 
     return (
-        <div className="flex flex-wrap items-start border-t border-slate-700 py-3">
+        <div className="flex flex-wrap items-center border-t border-slate-700 py-3">
             {/* Attachments and Image Upload Section */}
-            <div className="order-2 flex-1 xs:flex:none xs:order-1 p-2">
+            <div className="xs:flex:none xs:order-1 p-2">
                 <button className="p-1 text-gray-400 hover:text-gray-300 relative">
                     <PaperClipIcon className="w-6" />
                     <input 
@@ -37,7 +37,7 @@ const MessageInput = ({ conversation = null }) => {
             </div>
 
             {/* Message Input and Send Button */}
-            <div className="order-1 px-3 xs:p-0 min-w-[220px] basis-full xs:basis-0 xs:order-2 flex-1 relative">
+            <div className="order-1 px-3 xs:p-0 min-w-[220px] xs:order-2 flex-1 relative">
                 <div className="flex ">
                     <NewMessageInput 
                         value={newMessage}
