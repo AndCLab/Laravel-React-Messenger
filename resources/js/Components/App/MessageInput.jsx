@@ -17,21 +17,21 @@ const MessageInput = ({ conversation = null }) => {
         <div className="flex flex-wrap items-center border-t border-slate-700 py-3">
             {/* Attachments and Image Upload Section */}
             <div className="xs:flex:none xs:order-1 p-2">
-                <button className="p-1 text-gray-400 hover:text-gray-300 relative">
+            <button className="p-1 text-gray-400 hover:text-gray-200 relative">
                     <PaperClipIcon className="w-6" />
                     <input 
                         type="file"
                         multiple
-                        className="absolute left-0 top-0 right-0 bottom-0 z-20 opacity-0 cursor-pointer"
+                        className="absolute left-0 top-0 right-0 bottom-0 z-0 opacity-0 cursor-pointer"
                     />
                 </button>
-                <button className="p-1 text-fgray-400 hover:text-gray=300 relative">
+                <button className="p-1 text-gray-400 hover:text-gray-200 relative">
                     <PhotoIcon className="w-6" />
                     <input 
                         type="file"
                         multiple
                         accept="image/*"
-                        className="absolute left-0 top-0 bottom-0 z-20 opacity-0 cursor-pointer"
+                        className="absolute left-0 top-0 right-0 bottom-0 z-0 opacity-0 cursor-pointer pointer-events-all"
                     />
                 </button>
             </div>
@@ -43,7 +43,7 @@ const MessageInput = ({ conversation = null }) => {
                         value={newMessage}
                         onChange={(ev) => setNewMessage(ev.target.value)}
                     />
-                    <button className="btn btn-info rounded-1-none">
+                    <button className="btn btn-info rounded-1-none hover:text-gray-200">
                         {messageSending && (
                             <span className="loading loading-spinner loading-xs"></span>
                         )}
@@ -57,10 +57,10 @@ const MessageInput = ({ conversation = null }) => {
             </div>
             {/* Emojis and Reactions Section */}
             <div className="order-3 xs:order-3 p-2 flex">
-                <button className="p-1 text-gray-400 hover:text-gray-300">
+                <button className="p-1 text-gray-400 hover:text-gray-200">
                     <FaceSmileIcon className="w-6 h-6" />
                 </button>
-                <button className="p-1 text-gray-400 hover:text-gray-300">
+                <button className="p-1 text-gray-400 hover:text-gray-200">
                     <HandThumbUpIcon className="w-6 h-6" />
                 </button>
             </div>
