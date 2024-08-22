@@ -24,10 +24,10 @@ const ConversationItem = ({conversation, selectedConversation=null, online=null}
                 <UserAvatar user={conversation} online={online} />
             )}
             {conversation.is_group && <GroupAvatar/>}
-            <div className={`flex-1 text-xs max-w-full overflow-hidden` + (conversation.is_user && conversation.blocked_at ? "opacity-50" : "")}>
+            <div className={`flex-1 text-xs max-w-fit overflow-hidden` + (conversation.is_user && conversation.blocked_at ? "opacity-50" : "")}>
                 <div className="flex gap-1 justify-between items-center">
-                    <h3 className="text-sm font-semibold overflow-hidden text-nowrap text-ellipsis">{conversation.name}</h3>
-                    {conversation.last_message_date && (<span className="text-nowrap">{conversation.last_message_date}</span>)}
+                    <h3 className="text-sm font-semibold text-nowrap text-ellipsis">{conversation.name}</h3>
+                    {conversation.last_message_date && (<span className="text-nowrap opacity-50">{conversation.last_message_date}</span>)}
                 </div>
                 {conversation.last_message && (
                     <p className="text-xs text-nowrap overflow-hidden text-ellipsis">
