@@ -35,12 +35,12 @@ const MessageInput = ({ conversation = null }) => {
             onUploadProgress: (progressEvent) => {
                 const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
                 console.log(progress);
-            },
+            }
         }).then((response) => {
             setNewMessage("");
             setMessageSending(false);
         }).catch((error) => {
-            console.error('Axios error:', error);
+            console.error('Axios error:', error.response.data);
             setMessageSending(false);
         });
     }
