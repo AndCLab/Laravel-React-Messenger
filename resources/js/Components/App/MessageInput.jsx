@@ -7,11 +7,43 @@ import {
     PaperAirplaneIcon,
 } from "@heroicons/react/24/solid";
 import NewMessageInput from "./NewMessageInput";
+import axios from 'axios';
+
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
     const [inputErrorMessage, setInputErrorMessage] = useState("");
     const [messageSending, setMessageSending] = useState("");
+
+    const onSendClick = () => {
+        if (newMessage.trim() === "") {
+            setInputErrorMessage("Message cannot be empty.");
+            setTimeout(() => {
+                setInputErrorMessage("");
+            }, 3000)
+            return;
+        }
+        const formData = new FormData();
+        formData.append("message", newMessage);
+        if (conversation.is_user) {
+            formData.append("receiver_id", conversation.id);
+        } else if (conversation.is_group) {
+            formData.append("group_id", conversation.id);  
+        } 
+        setMessageSending(true);
+        axios.post(route("message.store"), formData, {
+            onUploadProgress: (progressEvent) => {
+                const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+                console.log(progress);
+            }
+        }).then((response) => {
+            setNewMessage("");
+            setMessageSending(false);
+        }).catch((error) => {
+            console.error('Axios error:', error.response.data);
+            setMessageSending(false);
+        });
+    }
 
     return (
         <div className="flex flex-wrap items-center border-t border-slate-700 py-3">
@@ -41,9 +73,10 @@ const MessageInput = ({ conversation = null }) => {
                 <div className="flex ">
                     <NewMessageInput 
                         value={newMessage}
+                        onSend={onSendClick}
                         onChange={(ev) => setNewMessage(ev.target.value)}
                     />
-                    <button className="btn btn-info rounded-1-none hover:text-gray-200">
+                    <button onClick={onSendClick} className="btn btn-info rounded-1-none hover:text-gray-200">
                         {messageSending && (
                             <span className="loading loading-spinner loading-xs"></span>
                         )}
