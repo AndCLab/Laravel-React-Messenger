@@ -11,6 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Http\Resources\MessageResource;
 
 class SocketMessage implements ShouldBroadcastNow
 {
@@ -45,7 +46,7 @@ class SocketMessage implements ShouldBroadcastNow
         if ($m->group_id) {
             $channels[] = new PrivateChannel('message.group.' . $m->group_id);
         } else {
-            new PrivateChannel('message.user.' . collect([$m->sender_id, $m->receiver_id])
+            $channels[] = new PrivateChannel('message.user.' . collect([$m->sender_id, $m->receiver_id])
             ->sort()->implode('-'));
         }
 
