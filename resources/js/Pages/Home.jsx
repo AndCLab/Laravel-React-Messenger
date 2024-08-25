@@ -74,6 +74,24 @@ function Home({ selectedConversation = null, messages = null }) {
         if (noMoreMessages) {
             return;
         }
+
+        const observer = new IntersectionObserver(
+            (entries) => 
+                entries.forEach(
+                    (entry) => entry.isIntersecting && loadMoreMessages()
+                ),
+            {
+                rootMargin: "0px 0px 250px 0px",
+            }
+        );
+        if (loadMoreIntersect.current) {
+            setTimeout(() => {
+                observer.observe(loadMoreIntersect.current);
+            }, 100);
+        }
+        return () => {
+            observer.disconnect();
+        };
     }, [localMessages]);
 
     return (
