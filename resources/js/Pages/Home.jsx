@@ -9,6 +9,8 @@ import { useEventBus } from '@/EventBus';
 
 function Home({ selectedConversation = null, messages = null }) {
     const [localMessages, setLocalMessages] = useState([]);
+    const [noMoreMessages, setMoreMessages] = useState(false);
+    const [scrollFromBottom, setScrollFromBottom] = useState(0);
     const loadMoreIntersect = useRef(null);
     const messagesCtrRef = useRef(null);
     const { on } = useEventBus();
