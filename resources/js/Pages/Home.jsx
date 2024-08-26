@@ -9,7 +9,7 @@ import { useEventBus } from '@/EventBus';
 
 function Home({ selectedConversation = null, messages = null }) {
     const [localMessages, setLocalMessages] = useState([]);
-    const [noMoreMessages, setMoreMessages] = useState(false);
+    const [noMoreMessages, setNoMoreMessages] = useState(false);
     const [scrollFromBottom, setScrollFromBottom] = useState(0);
     const loadMoreIntersect = useRef(null);
     const messagesCtrRef = useRef(null);
@@ -26,12 +26,16 @@ function Home({ selectedConversation = null, messages = null }) {
     };
 
     const loadMoreMessages = useCallback(() => {
+
+        if(noMoreMessages) {
+            return;
+        }
         // Find the first message object
         const firstMessage = localMessages[0];
         axios.get(route("message.loadOlder", firstMessage.id))
             .then(({ data }) => {
                 if (data.data.length === 0) {
-                    setMoreMessages(true);
+                    setNoMoreMessages(true);
                     return;
                 }
                 // Calculate how much is scrolled from bottom and scroll to the same position from bottom after messages are loaded
@@ -45,7 +49,7 @@ function Home({ selectedConversation = null, messages = null }) {
                     return [...data.data.reverse(), ...prevMessages];
                 });
             });
-    }, [localMessages]);
+    }, [localMessages, noMoreMessages]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -56,6 +60,7 @@ function Home({ selectedConversation = null, messages = null }) {
 
         const offCreated = on('message.created', messageCreated);
         setScrollFromBottom(0);
+        setNoMoreMessages(false);
 
         return () => {
             offCreated();
