@@ -23,6 +23,24 @@ const ChatLayout = ({ children }) => {
         )
     }
 
+    const messageCreated = (message) => {
+        setLocalConversations((oldUsers) => {
+            return oldUsers.map((u) => {
+                // If message is for user
+                if ( message.receiver_id && !u.is_group && (uid == message.sender_id || u.id == message.receiver_id)) {
+                    u.last_message = message.message;
+                    u.last_message_date = message.created_at;
+                    return u;
+                }
+                // If message is for group
+                if ( message.group_id && u.is_group && u.id == message.group_id) {
+                    u.last_message = message.message;
+                    u.last_message_date = message.created_at;
+                }
+            })
+        });
+    };
+
     useEffect(() => {
         setSortedConversations(
             localConversations.sort((a,b) => {

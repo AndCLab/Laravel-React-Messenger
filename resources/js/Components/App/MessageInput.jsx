@@ -16,6 +16,10 @@ const MessageInput = ({ conversation = null }) => {
     const [messageSending, setMessageSending] = useState("");
 
     const onSendClick = () => {
+        if (messageSending) {
+            return;
+        }
+
         if (newMessage.trim() === "") {
             setInputErrorMessage("Message cannot be empty.");
             setTimeout(() => {
@@ -76,10 +80,8 @@ const MessageInput = ({ conversation = null }) => {
                         onSend={onSendClick}
                         onChange={(ev) => setNewMessage(ev.target.value)}
                     />
-                    <button onClick={onSendClick} className="btn btn-info rounded-1-none hover:text-gray-200">
-                        {messageSending && (
-                            <span className="loading loading-spinner loading-xs"></span>
-                        )}
+                    <button onClick={onSendClick} disabled={messageSending} className="btn btn-info rounded-1-none hover:text-gray-200">
+                        
                         <PaperAirplaneIcon className="w-6" />
                         <span className="hidden sm:inline">Send</span>
                     </button>
