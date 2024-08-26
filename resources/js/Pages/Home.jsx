@@ -28,6 +28,7 @@ function Home({ selectedConversation = null, messages = null }) {
     const loadMoreMessages = useCallback(() => {
 
         if(noMoreMessages) {
+            debugger;       // for testing purposes (remove when finished)           
             return;
         }
         // Find the first message object
