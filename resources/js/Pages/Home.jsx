@@ -28,7 +28,7 @@ function Home({ selectedConversation = null, messages = null }) {
     const loadMoreMessages = useCallback(() => {
         // Find the first message object
         const firstMessage = localMessages[0];
-        axios.get(route("message,loadOlder", firstMessage.id))
+        axios.get(route("message.loadOlder", firstMessage.id))
             .then(({ data }) => {
                 if (data.data.length === 0) {
                     setMoreMessages(true);
@@ -55,6 +55,7 @@ function Home({ selectedConversation = null, messages = null }) {
         }, 10);
 
         const offCreated = on('message.created', messageCreated);
+        setScrollFromBottom(0);
 
         return () => {
             offCreated();
