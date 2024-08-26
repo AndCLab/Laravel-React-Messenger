@@ -26,9 +26,9 @@ function Home({ selectedConversation = null, messages = null }) {
     };
 
     const loadMoreMessages = useCallback(() => {
-
+        console.log('Loading more messages... ', noMoreMessages); 
         if(noMoreMessages) {
-            debugger;       // for testing purposes (remove when finished)           
+            // debugger;       // for testing purposes (remove when finished)          
             return;
         }
         // Find the first message object
@@ -36,6 +36,7 @@ function Home({ selectedConversation = null, messages = null }) {
         axios.get(route("message.loadOlder", firstMessage.id))
             .then(({ data }) => {
                 if (data.data.length === 0) {
+                    console.log('No more messages.');
                     setNoMoreMessages(true);
                     return;
                 }
