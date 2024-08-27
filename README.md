@@ -64,3 +64,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Installation and Usage:
+
+- Clone the repository: `git clone [your repository URL]`
+- Install dependencies: `composer install` && `npm install`
+- Install broadcasting and reverb: `php artisan install:broadcasting`
+- Set up environment variables: Create a .env file and configure your database, Pusher, and Reverb credentials.
+- Run the development server: `php artisan serve` && `npm run dev`
+- Start Reverb (with debugging): `php artisan reverb:start` || `php artisan reverb:start --debug`
