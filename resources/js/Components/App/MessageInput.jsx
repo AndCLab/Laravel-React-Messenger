@@ -9,6 +9,7 @@ import {
 import NewMessageInput from "./NewMessageInput";
 import axios from 'axios';
 import EmojiPicker from "emoji-picker-react";
+import { Fragment } from "react";
 
 
 const MessageInput = ({ conversation = null }) => {
