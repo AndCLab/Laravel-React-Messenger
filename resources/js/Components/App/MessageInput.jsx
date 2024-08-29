@@ -10,7 +10,7 @@ import NewMessageInput from "./NewMessageInput";
 import axios from 'axios';
 import EmojiPicker from "emoji-picker-react";
 import { Fragment } from "react";
-
+import { Popover, Transition } from  '@headlessui/react';
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
