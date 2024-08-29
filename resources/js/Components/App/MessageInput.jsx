@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/solid";
 import NewMessageInput from "./NewMessageInput";
 import axios from 'axios';
+import EmojiPicker from "emoji-picker-react";
 
 
 const MessageInput = ({ conversation = null }) => {
@@ -91,6 +92,7 @@ const MessageInput = ({ conversation = null }) => {
                 )}
             </div>
             {/* Emojis and Reactions Section */}
+            <EmojiPicker/>
             <div className="order-3 xs:order-3 p-2 flex">
                 <button className="p-1 text-gray-400 hover:text-gray-200">
                     <FaceSmileIcon className="w-6 h-6" />
