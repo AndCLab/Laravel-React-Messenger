@@ -48,6 +48,14 @@ const MessageInput = ({ conversation = null }) => {
             console.error('Axios error:', error.response.data);
             setMessageSending(false);
         });
+    };
+
+    const onLikeClick = () => {
+        if(messageSending) {
+            return;
+        }
+
+        setNewMessage("👍")
     }
 
     return (
@@ -103,9 +111,7 @@ const MessageInput = ({ conversation = null }) => {
                         </EmojiPicker>
                     </Popover.Panel>
                 </Popover>
-                <button className="p-1 text-gray-400 hover:text-gray-200">
-                </button>
-                <button className="p-1 text-gray-400 hover:text-gray-200">
+                <button onClick={onLikeClick} className="p-1 text-gray-400 hover:text-gray-200">
                     <HandThumbUpIcon className="w-6 h-6" />
                 </button>
             </div>
