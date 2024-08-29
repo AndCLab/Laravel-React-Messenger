@@ -54,8 +54,15 @@ const MessageInput = ({ conversation = null }) => {
         if(messageSending) {
             return;
         }
-
-        setNewMessage("👍")
+        const data = { 
+            message: "👍", 
+        }
+        if (conversation.is_user) {
+            data["receiver_id"] = conversation.id;
+        } else if (conversation.is_group) {
+            data["group_id"] = conversation.id;  
+        } 
+        axios.post(route("message.store"), data);
     }
 
     return (
