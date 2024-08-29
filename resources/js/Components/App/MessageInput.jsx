@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import {
     PaperClipIcon,
     PhotoIcon,
@@ -9,7 +9,6 @@ import {
 import NewMessageInput from "./NewMessageInput";
 import axios from 'axios';
 import EmojiPicker from "emoji-picker-react";
-import { Fragment } from "react";
 import { Popover, Transition } from  '@headlessui/react';
 
 const MessageInput = ({ conversation = null }) => {
@@ -93,10 +92,18 @@ const MessageInput = ({ conversation = null }) => {
                 )}
             </div>
             {/* Emojis and Reactions Section */}
-            <EmojiPicker/>
             <div className="order-3 xs:order-3 p-2 flex">
+                <Popover className="relative">
+                    <Popover.Button className="p-1 text-gray-400 hover:text-gray-300">
+                        <FaceSmileIcon className="w-6 h-6" />
+                    </Popover.Button>
+                    <Popover.Panel className="absolute z-10 right-0 bottom-full">
+                        <EmojiPicker theme="dark" onEmojiClick={ev => setNewMessage(newMessage + ev.emoji)}>
+
+                        </EmojiPicker>
+                    </Popover.Panel>
+                </Popover>
                 <button className="p-1 text-gray-400 hover:text-gray-200">
-                    <FaceSmileIcon className="w-6 h-6" />
                 </button>
                 <button className="p-1 text-gray-400 hover:text-gray-200">
                     <HandThumbUpIcon className="w-6 h-6" />
