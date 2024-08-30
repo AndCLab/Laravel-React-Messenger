@@ -1,5 +1,5 @@
 import ChatLayout from '@/Layouts/ChatLayout';
-import AuthenticatedLayout from '@/Layouts/AUthenticatedLayout';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
 import ConversationHeader from '@/Components/App/ConversationHeader';
