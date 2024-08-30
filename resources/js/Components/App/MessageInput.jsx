@@ -22,7 +22,7 @@ const MessageInput = ({ conversation = null }) => {
         }
 
         if (newMessage.trim() === "") {
-            setInputErrorMessage("Message cannot be empty.");
+            setInputErrorMessage("Message or Attachment is empty.");
             setTimeout(() => {
                 setInputErrorMessage("");
             }, 3000)
