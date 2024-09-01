@@ -18,7 +18,7 @@ const MessageInput = ({ conversation = null }) => {
     const [chosenFiles, setChosenProgress] = useState(0);
     const [uploadProgress, setUploadProgress] = useState(0);
 
-    const onFileChange = (ev) -> {
+    const onFileChange = (ev) => {
         const files = ev.target.files;
         const updatedFiles = [...files].map((file) => {
             return {
@@ -26,6 +26,9 @@ const MessageInput = ({ conversation = null }) => {
                 url: URL.createObjectURL(file),
             };
         });
+        setChosenFiles((prevFiles) => {
+            return [...prevFiles, ...updatedFiles];
+        })
     };
 
     const onSendClick = () => {
@@ -41,6 +44,9 @@ const MessageInput = ({ conversation = null }) => {
             return;
         }
         const formData = new FormData();
+        chosenFiles.forEach((file) => {
+            formData.append("attachments[]", file.file);
+        });
         formData.append("message", newMessage);
         if (conversation.is_user) {
             formData.append("receiver_id", conversation.id);
@@ -52,13 +58,19 @@ const MessageInput = ({ conversation = null }) => {
             onUploadProgress: (progressEvent) => {
                 const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
                 console.log(progress);
-            }
+                setUploadProgress(progress);
+            },
         }).then((response) => {
             setNewMessage("");
             setMessageSending(false);
+            setUploadProgress(0);
+            setChosenFiles([]);
         }).catch((error) => {
             console.error('Axios error:', error.response.data);
             setMessageSending(false);
+            setChosenFiles([]);
+            const message = error?.response?.data?.message;
+            setInputErrorMessage(message || "An error occurred while sending message");
         });
     };
 
@@ -86,6 +98,7 @@ const MessageInput = ({ conversation = null }) => {
                     <input 
                         type="file"
                         multiple
+                        onChange={onFileChange}
                         className="absolute left-0 top-0 right-0 bottom-0 z-0 opacity-0 cursor-pointer"
                     />
                 </button>
