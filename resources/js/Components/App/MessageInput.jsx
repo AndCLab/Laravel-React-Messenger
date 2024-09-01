@@ -108,6 +108,7 @@ const MessageInput = ({ conversation = null }) => {
                         type="file"
                         multiple
                         accept="image/*"
+                        onChange={onFileChange}
                         className="absolute left-0 top-0 right-0 bottom-0 z-0 opacity-0 cursor-pointer pointer-events-all"
                     />
                 </button>
@@ -126,7 +127,14 @@ const MessageInput = ({ conversation = null }) => {
                         <PaperAirplaneIcon className="w-6" />
                         <span className="hidden sm:inline">Send</span>
                     </button>
-                </div>
+                </div>{" "}
+                {!!uploadProgress && (
+                    <progress
+                        className="progress progress-info w-full"
+                        value={uploadProgress}
+                        max="100"
+                    ></progress>
+                )}
                 {inputErrorMessage && (
                     <p className="text-xs text-red-400">{inputErrorMessage}</p>
                 )}
