@@ -101,4 +101,12 @@ export const formatBytes = (bytes, decimals = 2) => {
     const k = 1024;
     const dm = decimals < 0 ? 0 : decimals;
     const sizes = ["Bytes", "KB", "MB", "GB"];
+
+    let i = 0;
+    let size = bytes;
+    while (size >= k) {
+        size /= k;
+        i++;
+    }
+    return parseFloat(size.toFixed(dm)) + " " + sizes[i];
 };
