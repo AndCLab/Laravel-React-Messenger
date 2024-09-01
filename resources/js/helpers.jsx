@@ -81,3 +81,8 @@ export const isAudio = (attachment) => {
     mime = mime.split("/");
     return mime[0].toLowerCase() === "audio";
 };
+
+export const isPDF = (attachment) => {
+    let mime = attachment.mime || attachment.type;
+    return mime === "application/pdf";
+};
