@@ -144,7 +144,24 @@ const MessageInput = ({ conversation = null }) => {
                             className={
                                 `relative flex justify-between cursor-pointer` + 
                                 (!isImage(file.file) ? " w-[240px " : "")
-                        }>
+                            }
+                        >
+                            {isImage(file.file) && (
+                                <img 
+                                    src={file.url}
+                                    alt=""
+                                    className="w-16 h-16 object-cover"
+                                />
+                            )}
+                            {isAudio(file.file) && (
+                                <CustomAudioPlayer
+                                    file={file}
+                                    showVolume={false}    
+                                />
+                            )}
+                            {!isAudio(file.file) && !isImage(file.file) && (
+                                <AttachmentPreview file={file} />
+                            )}
                         </div>
                     ))}
                 </div>
