@@ -160,6 +160,7 @@ function Home({ selectedConversation = null, messages = null }) {
                     attachments={previewAttachment.attachments}
                     index={previewAttachment.ind}
                     show={showAttachmentPreview}
+                    onCLose={() => setShowAttachmentPreview(false)}
                 />
             )}
         </>
