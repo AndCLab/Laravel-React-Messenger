@@ -1,22 +1,30 @@
-import React from "react";
-import { PaperClipIcon } from "@heroicons/react/24/solid";
-import { formatBytes, isPDF, isPreviewable } from "@/helpers";
+import {
+    PaperClipIcon,
+    ArrowDownTrayIcon,
+    PlayCircleIcon,
+} from "@heroicons/react/24/solid";
+import { isAudio, isImage, isPDF, isPreviewable, isVideo } from "../..//helpers";
 
-const AttachmentPreview = ({ file }) => {
+const MessageAttachments = ({ attachments, attachmentClick }) => {
     return (
-        <div className="w-full flex items-center gap-2 py-2 px-3 rounded-md bg-slate-800">
-            <div>
-                {isPDF(file.file) && <img src="/img/pdf.png" className="w-8" />}
-                {!isPreviewable(file.file) && (
-                    <div className="flex justify-center items-center w-10 h-10 bg-gray-700 rounded">
-                        <PaperClipIcon className="w-6" />
-                    </div>
-                )}
-            </div>
-            <div className="flex-1 text-gray-400 text-nowrap text-ellipsis overflow-hidden">
-                <h3>{file.file.name}</h3>
-                <p className="text-xs">{formatBytes(file.file.size)}</p>
-            </div>
-        </div>
+        <>
+            {attachments.length > 0 && (
+                <div className="mt-2 flex flex-wrap justify-end gap-1">
+                    {attachments.map((attachment, ind) => (
+                        <div
+                            onClick={(ev) => attachmentClick(attachments, ind)}
+                            key={attachment.id}
+                            className={`group flex flex-col items-center justify-center text-gray-500 relative cursor-pointer` + 
+                                (isAudio(attachment) ? "w-84" : "w-32 aspect-square bg-blue-100")
+                            }
+                        >
+
+                        </div>
+                    ))}
+                </div>
+            )}
+        </>
     );
 };
+
+export default MessageAttachments;
