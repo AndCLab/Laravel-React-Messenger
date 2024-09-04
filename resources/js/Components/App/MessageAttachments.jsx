@@ -25,8 +25,15 @@ const MessageAttachments = ({ attachments, attachmentClick }) => {
                                     href={attachment.url}
                                     className="z-20 opacity-100 group-hover:opacity-100 transition-all w-8 h-8 flex items-center justify-center text-gray-100 bg-gray-700 rounded absolute right-0 top-cursor-pointer hover:bg-gray-800"
                                 >
-
+                                    <ArrowDownTrayIcon className="w-4 h-4" />
                                 </a>
+                            )}
+                            
+                            {isImage(attachment) && (
+                                <img
+                                    src={attachment.url}
+                                    className="object-contain aspect-square"
+                                />
                             )}
                         </div>
                     ))}
