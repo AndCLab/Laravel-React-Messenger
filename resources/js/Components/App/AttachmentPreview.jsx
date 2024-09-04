@@ -20,3 +20,5 @@ const AttachmentPreview = ({ file }) => {
         </div>
     );
 };
+
+export default AttachmentPreview;
