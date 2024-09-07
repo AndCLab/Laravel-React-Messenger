@@ -11,12 +11,14 @@ import NewMessageInput from "./NewMessageInput";
 import axios from 'axios';
 import EmojiPicker from "emoji-picker-react";
 import { Popover, Transition } from  '@headlessui/react';
+import { isAudio, isImage } from "@/helpers";
+import AttachmentPreview from "./AttachmentPreview";
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
     const [inputErrorMessage, setInputErrorMessage] = useState("");
     const [messageSending, setMessageSending] = useState("");
-    const [chosenFiles, setChosenProgress] = useState(0);
+    const [chosenFiles, setChosenFiles] = useState([]);
     const [uploadProgress, setUploadProgress] = useState(0);
 
     const onFileChange = (ev) => {
@@ -37,7 +39,7 @@ const MessageInput = ({ conversation = null }) => {
             return;
         }
 
-        if (newMessage.trim() === "") {
+        if (newMessage.trim() === "" && chosenFiles.length === 0) {
             setInputErrorMessage("Message cannot be empty.");
             setTimeout(() => {
                 setInputErrorMessage("");
@@ -164,8 +166,8 @@ const MessageInput = ({ conversation = null }) => {
                                 <AttachmentPreview file={file} />
                             )}
                             <button
-                                onCLick={() => 
-                                    setChosenFIles(
+                                onClick={() => 
+                                    setChosenFiles(
                                         chosenFiles.filter(
                                             (f) => 
                                                 f.file.name !== file.file.name
