@@ -39,7 +39,7 @@ const MessageInput = ({ conversation = null }) => {
             return;
         }
 
-        if (newMessage.trim() === "") {
+        if (newMessage.trim() === "" && chosenFiles.length === 0) {
             setInputErrorMessage("Message cannot be empty.");
             setTimeout(() => {
                 setInputErrorMessage("");
@@ -167,7 +167,7 @@ const MessageInput = ({ conversation = null }) => {
                             )}
                             <button
                                 onClick={() => 
-                                    setChosenFIles(
+                                    setChosenFiles(
                                         chosenFiles.filter(
                                             (f) => 
                                                 f.file.name !== file.file.name
