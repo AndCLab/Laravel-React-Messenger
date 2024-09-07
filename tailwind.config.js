@@ -29,7 +29,7 @@ export default {
     plugins: [forms, require("daisyui")],
 
     daisyui: {
-        themes: ["forest"],
+        themes: ["sunset"],
         
       },
 };
