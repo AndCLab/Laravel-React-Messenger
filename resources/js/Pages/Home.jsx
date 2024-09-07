@@ -5,6 +5,7 @@ import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
 import ConversationHeader from '@/Components/App/ConversationHeader';
 import MessageItem from '@/Components/App/MessageItem';
 import MessageInput from '@/Components/App/MessageInput';
+import AttachmentPreviewModal from '@/Components/App/AttachmentPreviewModal';
 import { useEventBus } from '@/EventBus';
 
 function Home({ selectedConversation = null, messages = null }) {
@@ -146,7 +147,7 @@ function Home({ selectedConversation = null, messages = null }) {
                             <div className="flex-1 flex-col">
                                 <div ref={loadMoreIntersect}></div>
                                 {localMessages.map((message) => (
-                                    <MessageItem key={message.id} message={message}/>    
+                                    <MessageItem key={message.id} message={message} attachmentClick={onAttachmentClick}/>    
                                 ))}
                             </div>
                         )}
