@@ -1,4 +1,4 @@
-import { Fragmen, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
     PaperClipIcon,
@@ -21,6 +21,7 @@ export default function AttachmentPreviewModal({
         return attachments.filter((attachment) => isPreviewable(attachment));
     }, [attachments]);
     const close = () => {
+        console.log("Close button clicked");
         onClose();
     };
     const prev = () => {
