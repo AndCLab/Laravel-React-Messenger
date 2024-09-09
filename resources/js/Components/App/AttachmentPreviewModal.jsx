@@ -6,7 +6,14 @@ import {
     ChevronLeftIcon,
     ChevronRightIcon,
 } from "@heroicons/react/24/solid";
-import { isAudio, isImage, isPDF, isPreviewable, isVideo } from "@/helpers";
+import { 
+    isAudio, 
+    isImage, 
+    isPDF, 
+    isPreviewable, 
+    isVideo 
+} from "@/helpers";
+
 export default function AttachmentPreviewModal({
     attachments,
     index,

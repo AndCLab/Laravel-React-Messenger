@@ -18,7 +18,7 @@ import CustomAudioPlayer from "./CustomAudioPlayer";
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
     const [inputErrorMessage, setInputErrorMessage] = useState("");
-    const [messageSending, setMessageSending] = useState("");
+    const [messageSending, setMessageSending] = useState(false);
     const [chosenFiles, setChosenFiles] = useState([]);
     const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -32,7 +32,7 @@ const MessageInput = ({ conversation = null }) => {
         });
         setChosenFiles((prevFiles) => {
             return [...prevFiles, ...updatedFiles];
-        })
+        });
     };
 
     const onSendClick = () => {
