@@ -13,6 +13,7 @@ import EmojiPicker from "emoji-picker-react";
 import { Popover, Transition } from  '@headlessui/react';
 import { isAudio, isImage } from "@/helpers";
 import AttachmentPreview from "./AttachmentPreview";
+import CustomAudioPlayer from "./CustomAudioPlayer";
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
