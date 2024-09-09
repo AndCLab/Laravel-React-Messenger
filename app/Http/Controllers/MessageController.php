@@ -70,6 +70,7 @@ class MessageController extends Controller
     public function store(StoreMessageRequest $request)
     {
         $data = $request->validated();
+    \Log::info('Request Data: ', $data);
         $data['sender_id'] = auth()->id();
         $receiverId = $data['receiver_id'] ?? null;
         $groupId = $data['group_id'] ?? null;
@@ -107,7 +108,6 @@ class MessageController extends Controller
         //Implement socket to create real-time event when messages are sent
         SocketMessage::dispatch($message);
         return new MessageResource($message);
-
     }
 
     public function destroy(Message $message)

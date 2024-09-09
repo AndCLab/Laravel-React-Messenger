@@ -122,7 +122,7 @@ export default function AttachmentPreviewModal({
                                             )}
                                             {isPDF(attachment) && (
                                                 <iframe
-                                                    src={attachmen.url}
+                                                    src={attachment.url}
                                                     className="w-full h-full"
                                                 ></iframe>
                                             )}

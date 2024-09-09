@@ -74,7 +74,7 @@ const MessageInput = ({ conversation = null }) => {
             setMessageSending(false);
             setChosenFiles([]);
             const message = error?.response?.data?.message;
-            setInputErrorMessage(message || "An error occurred while sending message");
+            setInputErrorMessage(message || "An error occurred while sending the message");
         });
     };
 
