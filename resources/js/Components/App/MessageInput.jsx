@@ -13,11 +13,12 @@ import EmojiPicker from "emoji-picker-react";
 import { Popover, Transition } from  '@headlessui/react';
 import { isAudio, isImage } from "@/helpers";
 import AttachmentPreview from "./AttachmentPreview";
+import CustomAudioPlayer from "./CustomAudioPlayer";
 
 const MessageInput = ({ conversation = null }) => {
     const [newMessage, setNewMessage] = useState("");
     const [inputErrorMessage, setInputErrorMessage] = useState("");
-    const [messageSending, setMessageSending] = useState("");
+    const [messageSending, setMessageSending] = useState(false);
     const [chosenFiles, setChosenFiles] = useState([]);
     const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -29,9 +30,10 @@ const MessageInput = ({ conversation = null }) => {
                 url: URL.createObjectURL(file),
             };
         });
+        ev.target.value = null;
         setChosenFiles((prevFiles) => {
             return [...prevFiles, ...updatedFiles];
-        })
+        });
     };
 
     const onSendClick = () => {
@@ -73,7 +75,7 @@ const MessageInput = ({ conversation = null }) => {
             setMessageSending(false);
             setChosenFiles([]);
             const message = error?.response?.data?.message;
-            setInputErrorMessage(message || "An error occurred while sending message");
+            setInputErrorMessage(message || "An error occurred while sending the message");
         });
     };
 

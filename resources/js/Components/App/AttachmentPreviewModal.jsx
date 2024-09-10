@@ -6,7 +6,14 @@ import {
     ChevronLeftIcon,
     ChevronRightIcon,
 } from "@heroicons/react/24/solid";
-import { isAudio, isImage, isPDF, isPreviewable, isVideo } from "@/helpers";
+import { 
+    isAudio, 
+    isImage, 
+    isPDF, 
+    isPreviewable, 
+    isVideo 
+} from "@/helpers";
+
 export default function AttachmentPreviewModal({
     attachments,
     index,
@@ -14,12 +21,12 @@ export default function AttachmentPreviewModal({
     onClose = () => {},
 }) {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const attachment = useMemo(() => {
-        return attachments[currentIndex];
-    }, [attachments, currentIndex]);
     const previewableAttachments = useMemo(() => {
         return attachments.filter((attachment) => isPreviewable(attachment));
     }, [attachments]);
+    const attachment = useMemo(() => {
+        return previewableAttachments[currentIndex];
+    }, [attachments, currentIndex]);
     const close = () => {
         console.log("Close button clicked");
         onClose();
@@ -122,7 +129,7 @@ export default function AttachmentPreviewModal({
                                             )}
                                             {isPDF(attachment) && (
                                                 <iframe
-                                                    src={attachmen.url}
+                                                    src={attachment.url}
                                                     className="w-full h-full"
                                                 ></iframe>
                                             )}

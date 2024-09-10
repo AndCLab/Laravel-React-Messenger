@@ -6,7 +6,7 @@ const CustomAudioPlayer = ({ file, showVolume = true }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [volume, setVolume] = useState(1);
     const [duration, setDuration] = useState(0);
-    const [currentTime, setCurrentTime] = useSTate(0);
+    const [currentTime, setCurrentTime] = useState(0);
 
     const togglePlayPause = () => {
         const audio = audioRef.current;
@@ -52,7 +52,7 @@ const CustomAudioPlayer = ({ file, showVolume = true }) => {
                 onLoadedMetadata={handleLoadedMetadata}
                 className="hidden"
             />
-            <button onCLick={togglePlayPause}>
+            <button onClick={togglePlayPause}>
                 {isPlaying && <PauseCircleIcon className="w-6 text-gray-400" />}
                 {!isPlaying && <PlayCircleIcon className="w-6 text-gray-400" />}
             </button>
