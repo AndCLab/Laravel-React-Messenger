@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function() {
-    Route::get('/', [HomeController::class, 'home'])->name('dashboard');
+    Route::get('/Tutee/messages', [HomeController::class, 'home'])->name('dashboard');
     Route::get('user/{user}', [MessageController::class, 'byUser'])->name('chat.user');
     Route::get('group/{group}', [MessageController::class, 'byGroup'])->name('chat.group');
     Route::post('/message', [MessageController::class, 'store'])->name('message.store');
